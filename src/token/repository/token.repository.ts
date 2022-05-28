@@ -17,10 +17,10 @@ export class TokenRepository {
   }
 
   async getOne(id: ObjectId): Promise<TokenEntity> {
-    return await this.tokenModel.findById(id);
+    return await this.tokenModel.findOne({ user: id });
   }
 
-  async findOne(dto: IToken): Promise<TokenEntity > {
+  async findOne(dto: IToken): Promise<TokenEntity> {
     return await this.tokenModel.findOne(dto);
   }
 

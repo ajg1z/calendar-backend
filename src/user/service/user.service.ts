@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongoose';
+import { Connection, ObjectId } from 'mongoose';
 import {
   Injectable,
   HttpException,
@@ -17,6 +17,7 @@ import { UserRepository } from '../repository/user.repository';
 import { MailService } from './mail.service';
 import { IUpdateUser } from '../repository/user.interface';
 import { UserEntity } from '../entity/user.entity';
+import { InjectConnection } from '@nestjs/mongoose';
 
 @Injectable()
 export class UserService {
@@ -60,7 +61,6 @@ export class UserService {
       throw new HttpException('not authorized', HttpStatus.UNAUTHORIZED);
     const userData = this.tokenService.validateRefreshToken(refreshToken);
     const token = await this.tokenService.findOne({ refreshToken });
-    console.log(userData, token);
     if (!userData || !token) {
       throw new HttpException('not authorized', HttpStatus.UNAUTHORIZED);
     }
@@ -111,6 +111,14 @@ export class UserService {
 
   async logout(refreshToken: string) {
     return await this.tokenService.deleteToken(refreshToken);
+  }
+
+  async addEvent(id: ObjectId, eventId: ObjectId) {
+    await this.userRepository.addEvent(id, eventId);
+  }
+
+  async getOne(id: ObjectId) {
+    return this.userRepository.getOne(id);
   }
 
   async getMany(ids: ObjectId[]) {

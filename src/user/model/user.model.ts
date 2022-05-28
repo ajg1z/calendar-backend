@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document, ObjectId } from 'mongoose';
 import { typeEvent } from './user.interface';
-
+import { Event } from '../../event/model/event.model';
 export type UserDocument = User & Document;
 @Schema()
 export class User {
@@ -23,7 +23,7 @@ export class User {
   @Prop({ required: true, default: '///' })
   avatar: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }] })
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Event.name }] })
   events: ObjectId[];
 
   @Prop({

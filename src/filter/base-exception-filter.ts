@@ -14,6 +14,17 @@ export class BaseExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
 
+    console.log({
+      enterData: request.body,
+      errors: exception.errors,
+      message: exception.message,
+      instanceof: exception.name,
+      statusCode: status,
+      timestamp: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}(${new Date().getHours()}:${new Date().getMinutes()})`,
+      path: request.url,
+      method: request.method,
+    });
+
     response
       .status(status)
       .json({

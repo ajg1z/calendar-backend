@@ -1,7 +1,6 @@
-import { ObjectId } from "mongoose";
+import { ObjectId } from 'mongoose';
 
 export interface ICreateToken {
   user: ObjectId;
   refreshToken: string;
 }
-

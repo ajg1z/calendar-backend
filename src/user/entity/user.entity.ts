@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongoose';
+import { Event } from 'src/event/model/event.model';
 
 export interface UserEntity {
   name: string;

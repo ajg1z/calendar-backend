@@ -16,7 +16,10 @@ export class AuthGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request: Request = context.switchToHttp().getRequest();
-    const accessToken = request.headers.authorization?.split(' ')[1];
+    const accessToken =
+      typeof request.headers.authtorization === 'object'
+        ? request.headers.authtorization[0]
+        : request.headers.authtorization.split(' ')[1];
     if (!accessToken)
       throw new HttpException('not authorized', HttpStatus.UNAUTHORIZED);
     const userData = this.tokenService.validateAccessToken(accessToken);

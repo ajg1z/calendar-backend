@@ -7,7 +7,7 @@ export interface EventRepositorySignature {
   update(id: ObjectId, dto: IUpdateEvent): Promise<EventEntity | undefined>;
   getOne(id: ObjectId): Promise<EventEntity | undefined>;
   getMany(ids: ObjectId[]): Promise<EventEntity[]>;
-  deleteMany(ids: ObjectId[]): Promise<void>;
+  deleteMany(ids: ObjectId[]): Promise<EventEntity[]>;
   deleteOne(ids: ObjectId): Promise<EventEntity | undefined>;
 }
 
@@ -18,6 +18,7 @@ export interface ICreateEvent {
   year: number;
   description: string;
   typeEvent: typeEvent;
+  title: string;
 }
 
 export interface IUpdateEvent {
@@ -26,5 +27,5 @@ export interface IUpdateEvent {
   month?: number;
   year?: number;
   description?: string;
-  typeEvent?: typeEvent;
+  title?: string;
 }

@@ -63,6 +63,7 @@ export class TokenService {
 
   async saveToken(user: ObjectId, refreshToken: string) {
     const token = await this.tokenRepository.getOne(user);
+    console.log(token);
     if (token) {
       await this.tokenRepository.update(token._id, refreshToken);
     } else {

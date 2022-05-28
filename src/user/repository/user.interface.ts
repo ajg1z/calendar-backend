@@ -19,7 +19,7 @@ export interface IUpdateUser {
   isActivated?: boolean;
 }
 
-export interface IFindUser extends IUpdateUser {}
+export type IFindUser = IUpdateUser;
 
 export interface UserRepositorySignature {
   create(dto: ICreateUser): Promise<UserEntity>;

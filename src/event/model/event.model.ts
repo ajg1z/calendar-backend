@@ -25,9 +25,6 @@ export class Event {
 
   @Prop({ type: String, required: true })
   typeEvent: typeEvent;
-
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: '' }] })
-  events: ObjectId[];
 }
 
 export const EventModel = SchemaFactory.createForClass(Event);
