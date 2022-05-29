@@ -29,6 +29,10 @@ export class EventService {
     return events;
   }
 
+  async getMany(ids: ObjectId[]) {
+    return await this.eventRepository.getMany(ids);
+  }
+
   async deleteEvent(id: ObjectId | ObjectId[]): Promise<EventEntity[]> {
     if (Array.isArray(id)) {
       return await this.eventRepository.deleteMany(id);

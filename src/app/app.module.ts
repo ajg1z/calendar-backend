@@ -1,3 +1,4 @@
+import { SharedEventsModule } from './../shared-event/shared-event.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EventModule } from 'src/event/event.module';
@@ -13,7 +14,8 @@ import { TokenModule } from 'src/token/token.module';
     MongooseModule.forRoot('mongodb://localhost/calendar_DB'),
     UserModule,
     ConfigModule.forRoot({ load: [config] }),
-    TokenModule
+    TokenModule,
+    SharedEventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

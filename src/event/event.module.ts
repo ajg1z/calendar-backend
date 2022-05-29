@@ -13,6 +13,6 @@ import { UserModule } from 'src/user/user.module';
     MongooseModule.forFeature([{ name: Event.name, schema: EventModel }]),
     UserModule,
   ],
-  exports: [MongooseModule],
+  exports: [MongooseModule, EventService],
 })
 export class EventModule {}
