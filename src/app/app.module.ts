@@ -1,3 +1,4 @@
+import { SettingModule } from './../setting/setting.module';
 import { SharedEventsModule } from './../shared-event/shared-event.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -16,6 +17,7 @@ import { TokenModule } from 'src/token/token.module';
     ConfigModule.forRoot({ load: [config] }),
     TokenModule,
     SharedEventsModule,
+    SettingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

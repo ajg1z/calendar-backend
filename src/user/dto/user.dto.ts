@@ -11,6 +11,7 @@ import {
   IsOptional,
   ValidateNested,
   IsNotEmptyObject,
+  IsNumber,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -32,6 +33,9 @@ export class CreateUserDto {
   @IsOptional()
   @IsString()
   avatar: string;
+
+  @IsNumber()
+  timezone: number;
 }
 
 export class LoginUserDto {

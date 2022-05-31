@@ -1,3 +1,4 @@
+import { SettingModule } from './../setting/setting.module';
 import { UserRepository } from './repository/user.repository';
 import { UserService } from './service/user.service';
 import { Module } from '@nestjs/common';
@@ -13,6 +14,7 @@ import { TokenModule } from 'src/token/token.module';
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserModel }]),
     TokenModule,
+    SettingModule,
   ],
   exports: [MongooseModule, UserService, TokenModule],
 })

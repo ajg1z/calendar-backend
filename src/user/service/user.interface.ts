@@ -9,6 +9,7 @@ export interface IRegistrationUser {
   email: string;
   password: string;
   name: string;
+  timezone: number;
   avatar: string;
 }
 

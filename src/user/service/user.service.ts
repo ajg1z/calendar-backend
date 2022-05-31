@@ -1,3 +1,4 @@
+import { SettingService } from './../../setting/service/setting.service';
 import { Connection, ObjectId } from 'mongoose';
 import {
   Injectable,
@@ -25,6 +26,7 @@ export class UserService {
     private userRepository: UserRepository,
     private mailService: MailService,
     private tokenService: TokenService,
+    private settingService: SettingService,
   ) {}
 
   async registration(dto: IRegistrationUser): Promise<IRegistrationSignature> {
@@ -42,6 +44,11 @@ export class UserService {
       ...dto,
       password: hash,
       activationLink,
+    });
+    console.log(dto);
+    const setting = await this.settingService.create({
+      timezone: dto.timezone - new Date().getUTCHours(),
+      user: user._id,
     });
     // await this.mailService.sendActivationMail(   //проблемы с emailom
     //   user.email,
