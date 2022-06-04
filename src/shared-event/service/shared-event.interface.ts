@@ -16,3 +16,9 @@ export interface IGetReceiveSharedEvents {
   sender: string;
   events: EventEntity[];
 }
+
+export interface IRemoveEvent {
+  sender: string;
+  recipient: string;
+  event: ObjectId;
+}

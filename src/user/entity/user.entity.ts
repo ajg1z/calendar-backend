@@ -7,7 +7,6 @@ export interface UserEntity {
   password: string;
   avatar: string;
   events: ObjectId[];
-  settingId: ObjectId;
   activationLink: string;
   isActivated: boolean;
   _id: ObjectId;

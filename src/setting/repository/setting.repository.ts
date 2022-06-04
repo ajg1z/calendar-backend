@@ -11,12 +11,11 @@ export class SettingRepository {
   ) {}
 
   async create(dto: ICreateSetting): Promise<SettingEntity> {
-    console.log(dto);
     return await this.settingModel.create(dto);
   }
 
   async update(id: ObjectId, dto: IUpdateSetting): Promise<SettingEntity> {
-    return await this.settingModel.findByIdAndUpdate(id, dto);
+    return await this.settingModel.findByIdAndUpdate(id, dto, { new: true });
   }
 
   async delete(id: ObjectId) {

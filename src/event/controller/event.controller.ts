@@ -44,7 +44,11 @@ export class EventController {
 
   @UsePipes(BaseValidation)
   @Put()
-  async updateEvent(@Body() dto: UpdateEventDto) {
-    return await this.eventService.update(dto.id, dto.payload);
+  async updateEvent(@Body() dto: UpdateEventDto, @Req() req: Request) {
+    return await this.eventService.update(
+      dto.id,
+      dto.payload,
+      req.user.setting,
+    );
   }
 }

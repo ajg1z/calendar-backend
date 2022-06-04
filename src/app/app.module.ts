@@ -1,3 +1,4 @@
+import { TaskModule } from './../task/task.module';
 import { SettingModule } from './../setting/setting.module';
 import { SharedEventsModule } from './../shared-event/shared-event.module';
 import { Module } from '@nestjs/common';
@@ -18,6 +19,7 @@ import { TokenModule } from 'src/token/token.module';
     TokenModule,
     SharedEventsModule,
     SettingModule,
+    TaskModule,
   ],
   controllers: [AppController],
   providers: [AppService],

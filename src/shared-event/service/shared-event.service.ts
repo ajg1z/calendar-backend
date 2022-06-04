@@ -2,6 +2,7 @@ import {
   ICreateSharedEvent,
   IGetReceiveSharedEvents,
   IGetSentSharedEvents,
+  IRemoveEvent,
   typeUpdate,
 } from './shared-event.interface';
 import { SharedEventRepository } from './../repository/shared-event.repository';
@@ -56,12 +57,15 @@ export class SharedEventService {
     return result;
   }
 
-  async removeEvent(id: ObjectId, events: ObjectId[]) {
-    const sharedEvent = await this.sharedEventRepository.getOne(id);
+  async removeEvent(dto: IRemoveEvent) {
+    const sharedEvent = await this.sharedEventRepository.findOne({
+      sender: dto.sender,
+      recipient: dto.recipient,
+    });
     if (sharedEvent.events.length === 1) {
-      return await this.delete(id);
+      return await this.delete(sharedEvent._id);
     }
-    return await this.sharedEventRepository.remove(id, events);
+    return await this.sharedEventRepository.remove(sharedEvent._id, dto.event);
   }
 
   async getSentEvent(email: string) {

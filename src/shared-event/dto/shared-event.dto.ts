@@ -13,9 +13,13 @@ export class CreateSharedEventDto {
 
 export class DeleteSharedEventDto {
   @IsMongoId()
-  id: ObjectId;
+  event: ObjectId;
 
-  @IsMongoId({ each: true })
-  @IsArray()
-  events: ObjectId[];
+  @IsString()
+  @IsEmail()
+  sender: string;
+
+  @IsString()
+  @IsEmail()
+  recipient: string;
 }

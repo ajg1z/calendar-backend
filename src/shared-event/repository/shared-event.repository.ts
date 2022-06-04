@@ -41,11 +41,12 @@ export class SharedEventRepository {
     }
     return result;
   }
-  async remove(id: ObjectId, events: ObjectId[]) {
+
+  async remove(id: ObjectId, event: ObjectId) {
     return await this.sharedEventModel.findByIdAndUpdate(
       id,
       {
-        $pullAll: { events: events },
+        $pull: { events: event },
       },
       { new: true },
     );

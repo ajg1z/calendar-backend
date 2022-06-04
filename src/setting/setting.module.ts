@@ -5,7 +5,6 @@ import { Setting, SettingModel } from './model/setting.model';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
 import { TokenModule } from 'src/token/token.module';
-
 @Module({
   providers: [SettingRepository, SettingService],
   controllers: [SettingController],

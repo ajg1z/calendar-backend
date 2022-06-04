@@ -54,6 +54,7 @@ export class UserRepository implements UserRepositorySignature {
   async create(dto: ICreateUser): Promise<UserEntity> {
     return await this.userModel.create(dto);
   }
+
   async addEvent(id: ObjectId, eventId: ObjectId): Promise<void> {
     await this.userModel.findByIdAndUpdate(id, { $push: { events: eventId } });
   }

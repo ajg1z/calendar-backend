@@ -4,6 +4,7 @@ export interface ICreateToken {
   email: string;
   id: ObjectId;
   isActivated: boolean;
+  setting: ObjectId;
 }
 
 export interface CreateTokenSignature {

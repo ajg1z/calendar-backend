@@ -23,4 +23,5 @@ export interface IUser {
   email: string;
   id: ObjectId;
   isActivated: boolean;
+  setting: ObjectId;
 }

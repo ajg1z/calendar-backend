@@ -31,10 +31,9 @@ export class SharedEventController {
     return await this.sharedEventService.create(dto, req.user.email);
   }
 
-  @UsePipes(BaseValidation)
   @Put()
-  async delete(@Body() dto: DeleteSharedEventDto) {
-    return await this.sharedEventService.removeEvent(dto.id, dto.events);
+  async deleteEvent(@Body() dto: DeleteSharedEventDto) {
+    return await this.sharedEventService.removeEvent(dto);
   }
 
   @Get('sent')

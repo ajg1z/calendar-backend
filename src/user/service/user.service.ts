@@ -18,7 +18,6 @@ import { UserRepository } from '../repository/user.repository';
 import { MailService } from './mail.service';
 import { IUpdateUser } from '../repository/user.interface';
 import { UserEntity } from '../entity/user.entity';
-import { InjectConnection } from '@nestjs/mongoose';
 
 @Injectable()
 export class UserService {
@@ -45,20 +44,21 @@ export class UserService {
       password: hash,
       activationLink,
     });
-    console.log(dto);
     const setting = await this.settingService.create({
-      timezone: dto.timezone - new Date().getUTCHours(),
+      timezone: new Date().getUTCHours() - dto.timezone,
       user: user._id,
     });
-    // await this.mailService.sendActivationMail(   //проблемы с emailom
-    //   user.email,
-    //   `http://localhost:3001/user/activate/${activationLink}`,
-    // );
+    await this.mailService.sendActivationMail(
+      user.email,
+      `http://localhost:3001/user/activate/${activationLink}`,
+    );
     const tokens = this.tokenService.createTokens({
       email: user.email,
       id: user._id,
       isActivated: user.isActivated,
+      setting: setting._id,
     });
+
     await this.tokenService.saveToken(user._id, tokens.refreshToken);
     return await this.generateToken(user);
   }
@@ -85,10 +85,12 @@ export class UserService {
   }
 
   async generateToken(user: UserEntity): Promise<IRegistrationSignature> {
+    const setting = await this.settingService.findByUser(user._id);
     const tokens = this.tokenService.createTokens({
       email: user.email,
       id: user._id,
       isActivated: user.isActivated,
+      setting: setting._id,
     });
 
     await this.tokenService.saveToken(user._id, tokens.refreshToken);
@@ -99,6 +101,7 @@ export class UserService {
         email: user.email,
         id: user._id,
         isActivated: user.isActivated,
+        setting: setting._id,
       },
     };
   }

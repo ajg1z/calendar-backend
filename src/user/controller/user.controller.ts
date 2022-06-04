@@ -42,7 +42,6 @@ export class UserController {
     @Body() dto: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    console.log('DTO', dto);
     const newUser = await this.userService.registration(dto);
     res.cookie('refreshToken', newUser.refreshToken, {
       httpOnly: true,

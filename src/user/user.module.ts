@@ -16,6 +16,6 @@ import { TokenModule } from 'src/token/token.module';
     TokenModule,
     SettingModule,
   ],
-  exports: [MongooseModule, UserService, TokenModule],
+  exports: [MongooseModule, UserService, TokenModule, MailService],
 })
 export class UserModule {}
